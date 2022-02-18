@@ -41,8 +41,10 @@ static BOOL WINAPI ctrl_c_handler(DWORD fdwCtrlType)
 /* pm_init is the windows-dependent initialization.*/
 void pm_init(void)
 {
+#ifdef USE_WIN32_EXIT_HANDLERS
     atexit(pm_exit);
     SetConsoleCtrlHandler(ctrl_c_handler, TRUE);
+#endif
 #ifdef DEBUG
     printf("registered pm_exit with atexit()\n");
 #endif
