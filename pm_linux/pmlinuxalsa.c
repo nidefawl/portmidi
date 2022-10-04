@@ -854,7 +854,7 @@ PmError pm_linuxalsa_init(void)
                 if (pm_default_output_device_id == -1) 
                     pm_default_output_device_id = pm_descriptor_len;
                 pm_add_device("ALSA",
-                        pm_strdup(snd_seq_port_info_get_name(pinfo)),
+                        (snd_seq_port_info_get_name(pinfo)),
                         FALSE, FALSE,
                         MAKE_DESCRIPTOR(snd_seq_port_info_get_client(pinfo),
                                         snd_seq_port_info_get_port(pinfo)),
@@ -864,7 +864,7 @@ PmError pm_linuxalsa_init(void)
                 if (pm_default_input_device_id == -1) 
                     pm_default_input_device_id = pm_descriptor_len;
                 pm_add_device("ALSA",
-                        pm_strdup(snd_seq_port_info_get_name(pinfo)),
+                        (snd_seq_port_info_get_name(pinfo)),
                         TRUE, FALSE,
                         MAKE_DESCRIPTOR(snd_seq_port_info_get_client(pinfo),
                                         snd_seq_port_info_get_port(pinfo)),
@@ -883,10 +883,6 @@ void pm_linuxalsa_term(void)
 {
     if (seq) {
         snd_seq_close(seq);
-        pm_free(pm_descriptors);
-        pm_descriptors = NULL;
-        pm_descriptor_len = 0;
-        pm_descriptor_max = 0;
     }
 }
 
